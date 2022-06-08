@@ -1,0 +1,32 @@
+{
+  "name": "learn-babylon",
+  "description": "sandbox of babylonjs",
+  "version": "0.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "build": "webpack",
+    "dev": "webpack serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haruyuki-16278/learn-babylon-js.git"
+  },
+  "author": "haruyuki_16278",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/haruyuki-16278/learn-babylon-js/issues"
+  },
+  "homepage": "https://github.com/haruyuki-16278/learn-babylon-js#readme",
+  "dependencies": {
+    "babylonjs": "^5.9.1",
+    "babylonjs-loaders": "^5.9.1"
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^11.0.0",
+    "ts-loader": "^9.3.0",
+    "typescript": "^4.7.3",
+    "webpack": "^5.73.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.9.2"
+  }
+}
