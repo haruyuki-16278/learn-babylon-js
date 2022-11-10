@@ -17,8 +17,12 @@ import 'babylonjs-loaders'
 
     const ground = BABYLON.CreateGround("ground", {width: 10, height: 10}, scene)
 
-    const box1 = BABYLON.MeshBuilder.CreateBox("box1", {width: 2, height: 1.5, depth: 3})
-    box1.position.y = 0.75
+    const box1 = BABYLON.MeshBuilder.CreateBox("box1", {})
+    box1.position.y = 0.5
+    const roof1 = BABYLON.MeshBuilder.CreateCylinder("roof1", {diameter: 1.3, height: 1.2, tessellation: 3})
+    roof1.scaling.x = 0.75
+    roof1.rotation.z = BABYLON.Tools.ToRadians(90)
+    roof1.position.y = 1.22
 
     const box2 = BABYLON.MeshBuilder.CreateBox("box2", {})
     box2.scaling.x = 2
