@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <script src="https://cdn.babylonjs.com/viewer/babylon.viewer.js"></script>
+  <style>
+    html, body {
+      width: 100%;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      width: 100%;
+      padding: 0 10%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .header {
+      height: 56px;
+      padding: 8px;
+      line-height: 40px;
+      font-size: 40px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .cell {
+      width: 200px;
+      height: 300px;
+      padding: 16px;
+      border: 2px solid lightgray;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    Viewer News
+  </div>
+  <div class="list">
+    <div class="cell babylon">
+      <babylon model="https://assets.babylonjs.com/meshes/box.glb"></babylon>
+    </div>
+    <div class="cell">
+      サンプルテキスト
+    </div>
+    <div class="cell">
+      サンプルテキスト
+    </div>
+    <div class="cell">
+      サンプルテキスト
+    </div>
+    <div class="cell">
+      サンプルテキスト
+    </div>
+    <div class="cell">
+      サンプルテキスト
+    </div>
+  </div>
+</body>
+
