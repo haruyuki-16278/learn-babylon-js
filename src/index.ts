@@ -16,27 +16,30 @@ import 'babylonjs-loaders'
     light.intensity = 0.7
 
     const ground = BABYLON.CreateGround("ground", {width: 10, height: 10}, scene)
+    const groundMat = new BABYLON.StandardMaterial("groundMat")
+    groundMat.diffuseColor = new BABYLON.Color3(0, 1, 0)
+    ground.material = groundMat
 
+    const faceUV = [
+      new BABYLON.Vector4(0.5, 0.0, 0.75, 1.0),
+      new BABYLON.Vector4(0.0, 0.0, 0.25, 1.0),
+      new BABYLON.Vector4(0.25, 0.0, 0.5, 1.0),
+      new BABYLON.Vector4(0.75, 0.0, 1.0, 1.0)
+    ]
+
+    const box1Mat = new BABYLON.StandardMaterial("box1Mat")
+    box1Mat.diffuseTexture = new BABYLON.Texture("https://www.babylonjs-playground.com/textures/floor.png", scene)
     const box1 = BABYLON.MeshBuilder.CreateBox("box1", {})
     box1.position.y = 0.5
+    box1.material = box1Mat
+
+    const roof1Mat = new BABYLON.StandardMaterial("roof1Mat")
+    roof1Mat.diffuseTexture = new BABYLON.Texture("https://assets.babylonjs.com/environments/roof.jpg", scene)
     const roof1 = BABYLON.MeshBuilder.CreateCylinder("roof1", {diameter: 1.3, height: 1.2, tessellation: 3})
     roof1.scaling.x = 0.75
     roof1.rotation.z = BABYLON.Tools.ToRadians(90)
     roof1.position.y = 1.22
-
-    const box2 = BABYLON.MeshBuilder.CreateBox("box2", {})
-    box2.scaling.x = 2
-    box2.scaling.y = 1.5
-    box2.scaling.z = 3
-    box2.position = new BABYLON.Vector3(-4, 0.75, 0)
-    box2.rotation.y = BABYLON.Tools.ToRadians(-45)
-
-    const box3 = BABYLON.MeshBuilder.CreateBox("box3", {})
-    box3.scaling = new BABYLON.Vector3(2, 1.5, 3)
-    box3.position.x = 4
-    box3.position.y = 0.75
-    box3.position.z = 0
-    box3.rotation.y = BABYLON.Tools.ToRadians(45)
+    roof1.material = roof1Mat
 
     return scene
   }
