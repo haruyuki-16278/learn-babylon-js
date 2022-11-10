@@ -15,8 +15,13 @@ import 'babylonjs-loaders'
     const light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene)
     light.intensity = 0.7
 
-    const box = BABYLON.CreateBox("box", {}, scene)
-    box.position.z = 2
+    BABYLON.SceneLoader.ImportMeshAsync("", "https://assets.babylonjs.com/meshes/", "both_houses_scene.babylon")
+      .then((result) => {
+        result.meshes[1].position.y = 5
+        result.meshes.forEach(item => {
+          console.log(item.name)
+        })
+      })
 
     return scene
   }
