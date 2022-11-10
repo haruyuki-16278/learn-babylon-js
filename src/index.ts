@@ -17,10 +17,22 @@ import 'babylonjs-loaders'
 
     const ground = BABYLON.CreateGround("ground", {width: 10, height: 10}, scene)
 
-    const sound = new BABYLON.Sound("sound", "campfire.mp3", scene, null, {loop: true, autoplay: true})
+    const box1 = BABYLON.MeshBuilder.CreateBox("box1", {width: 2, height: 1.5, depth: 3})
+    box1.position.y = 0.75
 
-    const box = BABYLON.CreateBox("box", {}, scene)
-    box.position.y = 0.5
+    const box2 = BABYLON.MeshBuilder.CreateBox("box2", {})
+    box2.scaling.x = 2
+    box2.scaling.y = 1.5
+    box2.scaling.z = 3
+    box2.position = new BABYLON.Vector3(-4, 0.75, 0)
+    box2.rotation.y = BABYLON.Tools.ToRadians(-45)
+
+    const box3 = BABYLON.MeshBuilder.CreateBox("box3", {})
+    box3.scaling = new BABYLON.Vector3(2, 1.5, 3)
+    box3.position.x = 4
+    box3.position.y = 0.75
+    box3.position.z = 0
+    box3.rotation.y = BABYLON.Tools.ToRadians(45)
 
     return scene
   }
