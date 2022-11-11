@@ -20,26 +20,49 @@ import 'babylonjs-loaders'
     groundMat.diffuseColor = new BABYLON.Color3(0, 1, 0)
     ground.material = groundMat
 
-    const faceUV = [
+    const cubehouseFaceUV = [
       new BABYLON.Vector4(0.5, 0.0, 0.75, 1.0),
       new BABYLON.Vector4(0.0, 0.0, 0.25, 1.0),
       new BABYLON.Vector4(0.25, 0.0, 0.5, 1.0),
       new BABYLON.Vector4(0.75, 0.0, 1.0, 1.0)
     ]
 
-    const box1Mat = new BABYLON.StandardMaterial("box1Mat")
-    box1Mat.diffuseTexture = new BABYLON.Texture("https://www.babylonjs-playground.com/textures/floor.png", scene)
-    const box1 = BABYLON.MeshBuilder.CreateBox("box1", {})
-    box1.position.y = 0.5
-    box1.material = box1Mat
+    const cubehouseBoxMat = new BABYLON.StandardMaterial("cubehouseBoxMat")
+    cubehouseBoxMat.diffuseTexture = new BABYLON.Texture("https://assets.babylonjs.com/environments/cubehouse.png", scene)
+    const cubehouseBox = BABYLON.MeshBuilder.CreateBox("cubehouseBox", {faceUV: cubehouseFaceUV, wrap: true})
+    cubehouseBox.position.y = 0.5
+    cubehouseBox.material = cubehouseBoxMat
 
-    const roof1Mat = new BABYLON.StandardMaterial("roof1Mat")
-    roof1Mat.diffuseTexture = new BABYLON.Texture("https://assets.babylonjs.com/environments/roof.jpg", scene)
-    const roof1 = BABYLON.MeshBuilder.CreateCylinder("roof1", {diameter: 1.3, height: 1.2, tessellation: 3})
-    roof1.scaling.x = 0.75
-    roof1.rotation.z = BABYLON.Tools.ToRadians(90)
-    roof1.position.y = 1.22
-    roof1.material = roof1Mat
+    const cubehouseRoofMat = new BABYLON.StandardMaterial("cubehouseRoofMat")
+    cubehouseRoofMat.diffuseTexture = new BABYLON.Texture("https://assets.babylonjs.com/environments/roof.jpg", scene)
+    const cubehouseRoof = BABYLON.MeshBuilder.CreateCylinder("cubehouseRoof", {diameter: 1.3, height: 1.2, tessellation: 3})
+    cubehouseRoof.scaling.x = 0.75
+    cubehouseRoof.rotation.z = BABYLON.Tools.ToRadians(90)
+    cubehouseRoof.position.y = 1.22
+    cubehouseRoof.material = cubehouseRoofMat
+
+    const detachedhouseFaceUV = [
+      new BABYLON.Vector4(0.0, 0.0, 0.4, 1.0),
+      new BABYLON.Vector4(0.6, 0.0, 1.0, 1.0),
+      new BABYLON.Vector4(0.4, 0.0, 0.6, 1.0),
+      new BABYLON.Vector4(0.4, 0.0, 0.6, 1.0),
+    ]
+
+    const detachedhouseBoxMat = new BABYLON.StandardMaterial("detachedhouseBoxMat")
+    detachedhouseBoxMat.diffuseTexture = new BABYLON.Texture("https://assets.babylonjs.com/environments/semihouse.png", scene)
+    const detachedhouseBox = BABYLON.MeshBuilder.CreateBox("detachedhouseBox", {width: 2, height: 1, depth: 1, faceUV: detachedhouseFaceUV, wrap: true}, scene)
+    detachedhouseBox.position.y = 0.5
+    detachedhouseBox.position.x = 3
+    detachedhouseBox.material = detachedhouseBoxMat
+
+    const detachedhouseRoofMat = new BABYLON.StandardMaterial("detachedhouseRoofMat")
+    detachedhouseRoofMat.diffuseTexture = new BABYLON.Texture("https://assets.babylonjs.com/environments/roof.jpg", scene)
+    const detachedhouseRoof = BABYLON.MeshBuilder.CreateCylinder("detachedhouseRoof", {diameter: 1.3, height: 2.2, tessellation: 3})
+    detachedhouseRoof.scaling.x = 0.75
+    detachedhouseRoof.rotation.z = BABYLON.Tools.ToRadians(90)
+    detachedhouseRoof.position.y = 1.22
+    detachedhouseRoof.position.x = 3
+    detachedhouseRoof.material = detachedhouseRoofMat
 
     return scene
   }
