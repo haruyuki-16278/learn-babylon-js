@@ -19,6 +19,8 @@ import 'babylonjs-loaders'
     const box = buildBox()
     const roof = buildRoof()
 
+    const merged = BABYLON.Mesh.MergeMeshes([box, roof], true, false, null, false, true)
+
     return scene
   }
 
