@@ -16,10 +16,8 @@ import 'babylonjs-loaders'
     light.intensity = 0.7
 
     const ground = buildGround()
-    const box = buildBox()
-    const roof = buildRoof()
 
-    const merged = BABYLON.Mesh.MergeMeshes([box, roof], true, false, null, false, true)
+    const house = buildHouse(2)
 
     return scene
   }
@@ -31,27 +29,45 @@ import 'babylonjs-loaders'
     ground.material = groundMat
   }
 
-  const buildBox = (): ReturnType<typeof BABYLON.MeshBuilder.CreateBox> => { 
-    const faceUV = [
-      new BABYLON.Vector4(0.5, 0.0, 0.75, 1.0),
-      new BABYLON.Vector4(0.0, 0.0, 0.25, 1.0),
-      new BABYLON.Vector4(0.25, 0.0, 0.5, 1.0),
-      new BABYLON.Vector4(0.75, 0.0, 1.0, 1.0)
-    ]
+  const buildHouse = (width: 1 | 2): ReturnType<typeof BABYLON.Mesh.MergeMeshes> => {
+    const box = buildBox(width)
+    const roof = buildRoof(width)
+
+    return BABYLON.Mesh.MergeMeshes([box, roof], true, false, null, false, true)
+  }
+
+  const buildBox = (width: 1 | 2): ReturnType<typeof BABYLON.MeshBuilder.CreateBox> => { 
+    let faceUV: BABYLON.Vector4[]
 
     const boxMat = new BABYLON.StandardMaterial("boxMat")
-    boxMat.diffuseTexture = new BABYLON.Texture("https://assets.babylonjs.com/environments/cubehouse.png", scene)
-    const box = BABYLON.MeshBuilder.CreateBox("box", {faceUV: faceUV, wrap: true})
+
+    if (width === 2) {
+      boxMat.diffuseTexture = new BABYLON.Texture("https://assets.babylonjs.com/environments/semihouse.png", scene)
+      faceUV = [new BABYLON.Vector4(0.6, 0.0, 1.0, 1.0),
+                new BABYLON.Vector4(0.0, 0.0, 0.4, 1.0),
+                new BABYLON.Vector4(0.4, 0.0, 0.6, 1.0),
+                new BABYLON.Vector4(0.4, 0.0, 0.6, 1.0)]
+    } else {
+      boxMat.diffuseTexture = new BABYLON.Texture("https://assets.babylonjs.com/environments/cubehouse.png", scene)
+      faceUV = [new BABYLON.Vector4(0.5, 0.0, 0.75, 1.0),
+                new BABYLON.Vector4(0.0, 0.0, 0.25, 1.0),
+                new BABYLON.Vector4(0.25, 0.0, 0.5, 1.0),
+                new BABYLON.Vector4(0.75, 0.0, 1.0, 1.0)]
+    }
+
+    const box = BABYLON.MeshBuilder.CreateBox("box", {width: width, faceUV: faceUV, wrap: true})
     box.position.y = 0.5
     box.material = boxMat
+
     return box
   }
 
-  const buildRoof = (): ReturnType<typeof BABYLON.MeshBuilder.CreateCylinder> => {
+  const buildRoof = (width: 1 | 2): ReturnType<typeof BABYLON.MeshBuilder.CreateCylinder> => {
     const roofMat = new BABYLON.StandardMaterial("roofMat")
     roofMat.diffuseTexture = new BABYLON.Texture("https://assets.babylonjs.com/environments/roof.jpg", scene)
     const roof = BABYLON.MeshBuilder.CreateCylinder("roof", {diameter: 1.3, height: 1.2, tessellation: 3})
     roof.scaling.x = 0.75
+    roof.scaling.y = width
     roof.rotation.z = BABYLON.Tools.ToRadians(90)
     roof.position.y = 1.22
     roof.material = roofMat
