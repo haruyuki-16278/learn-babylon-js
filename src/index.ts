@@ -17,16 +17,58 @@ import 'babylonjs-loaders'
 
     const ground = buildGround()
 
-    const house = buildHouse(2)
+    buildDwellings()
 
     return scene
   }
 
   const buildGround = (): void => {
-    const ground = BABYLON.CreateGround("ground", {width: 10, height: 10})
+    const ground = BABYLON.CreateGround("ground", {width: 15, height: 16})
     const groundMat = new BABYLON.StandardMaterial("groundMat")
     groundMat.diffuseColor = new BABYLON.Color3(0, 1, 0)
     ground.material = groundMat
+  }
+
+  const buildDwellings = () => {
+    const detachedHouse = buildHouse(1)
+    detachedHouse.rotation.y = BABYLON.Tools.ToRadians(-11.25)
+    detachedHouse.position = new BABYLON.Vector3(-6.8, 0, 2.5)
+
+    const semiHouse = buildHouse(2)
+    semiHouse.rotation.y = BABYLON.Tools.ToRadians(-11.25)
+    semiHouse.position = new BABYLON.Vector3(-4.5, 0, 3)
+
+    const places = [[1, BABYLON.Tools.ToRadians(-11.25), -6.8, 2.5],
+                    [2, BABYLON.Tools.ToRadians(-11.25), -4.5, 3],
+                    [2, BABYLON.Tools.ToRadians(-11.25), -1.5, 4],
+                    [2, BABYLON.Tools.ToRadians(-60), 1.5, 6],
+                    [2, BABYLON.Tools.ToRadians(168.75), -6.4, -1.5],
+                    [1, BABYLON.Tools.ToRadians(168.75), -4.1, -1],
+                    [2, BABYLON.Tools.ToRadians(168.75), -2.1, -0.5],
+                    [1, BABYLON.Tools.ToRadians(-144), 0, -1],
+                    [1, BABYLON.Tools.ToRadians(250), 0.5, -3],
+                    [2, BABYLON.Tools.ToRadians(260), 0.75, -5],
+                    [1, BABYLON.Tools.ToRadians(255), 0.75, -7],
+                    [2, BABYLON.Tools.ToRadians(85), 4.75, -1],
+                    [1, BABYLON.Tools.ToRadians(88), 4.5, -3],
+                    [2, BABYLON.Tools.ToRadians(85), 4.75, -5],
+                    [1, BABYLON.Tools.ToRadians(85), 4.75, -7],
+                    [2, BABYLON.Tools.ToRadians(-60), 5.25, 2],
+                    [1, BABYLON.Tools.ToRadians(-60), 6, 4]]
+
+    const houses: Array<BABYLON.InstancedMesh> = []
+    let i: number = 0
+    places.forEach((place) => {
+      if (place[0] === 1) {
+        houses.push(detachedHouse.createInstance(`house${i}`))
+      } else {
+        houses.push(semiHouse.createInstance(`house${i}`))
+      }
+
+      houses[i].rotation.y = place[1]
+      houses[i].position = new BABYLON.Vector3(place[2], 0, place[3])
+      i++
+    })
   }
 
   const buildHouse = (width: 1 | 2): ReturnType<typeof BABYLON.Mesh.MergeMeshes> => {
